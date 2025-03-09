@@ -1,0 +1,24 @@
+class Solution:
+    def minSwapsCouples(self, row):
+        n = len(row) // 2  
+        partner = {x: x ^ 1 for x in range(len(row))}  
+        position = {x: i for i, x in enumerate(row)}  
+        swaps = 0  
+        
+        for i in range(0, len(row), 2):  
+            first_person = row[i]  
+            second_person = row[i + 1]  
+            correct_partner = partner[first_person]  
+
+            if second_person != correct_partner:  
+                swaps += 1
+                wrong_partner_index = position[correct_partner]  
+                
+                
+                row[i + 1], row[wrong_partner_index] = row[wrong_partner_index], row[i + 1]
+                
+                
+                position[row[wrong_partner_index]] = wrong_partner_index
+                position[row[i + 1]] = i + 1
+
+        return swaps
