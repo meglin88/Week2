@@ -1,0 +1,13 @@
+class Solution:
+    def minimumReplacement(self, nums):
+        n = len(nums)
+        operations = 0  
+        last = nums[-1]  
+
+        for i in range(n - 2, -1, -1):  
+            if nums[i] > last:  
+                parts = (nums[i] + last - 1) // last  
+                operations += parts - 1  
+                last = nums[i] // parts  
+            
+        return operations
